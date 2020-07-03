@@ -19,6 +19,7 @@ PATH="$TOP/prebuilts/misc/linux-x86/dtc:$PATH"
 PATH="$TOP/prebuilts/misc/linux-x86/libufdt:$PATH"
 export LD_LIBRARY_PATH="$TOP/prebuilts/clang/host/linux-x86/clang-r353983c/lib64:$LD_LIBRARY_PATH"
 export DTC_EXT="$TOP/prebuilts/misc/linux-x86/dtc/dtc"
+export DTC_OVERLAY_TEST_EXT="$TOP/prebuilts/misc/linux-x86/libufdt/ufdt_apply_overlay"
 
 chrt -bp 0 $$
 
