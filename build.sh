@@ -4,22 +4,22 @@ set -o errexit
 
 [[ $# -eq 0 ]] || exit 1
 
-TOP=$(realpath ../../..)
+ROOT_DIR=$(realpath ../../..)
 
 export KBUILD_BUILD_USER=grapheneos
 export KBUILD_BUILD_HOST=grapheneos
 
-PATH="$TOP/prebuilts/build-tools/linux-x86/bin:$PATH"
-PATH="$TOP/prebuilts/build-tools/path/linux-x86:$PATH"
-PATH="$TOP/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
-PATH="$TOP/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
-PATH="$TOP/prebuilts/clang/host/linux-x86/clang-r353983c/bin:$PATH"
-PATH="$TOP/prebuilts/misc/linux-x86/lz4:$PATH"
-PATH="$TOP/prebuilts/misc/linux-x86/dtc:$PATH"
-PATH="$TOP/prebuilts/misc/linux-x86/libufdt:$PATH"
-export LD_LIBRARY_PATH="$TOP/prebuilts/clang/host/linux-x86/clang-r353983c/lib64:$LD_LIBRARY_PATH"
-export DTC_EXT="$TOP/prebuilts/misc/linux-x86/dtc/dtc"
-export DTC_OVERLAY_TEST_EXT="$TOP/prebuilts/misc/linux-x86/libufdt/ufdt_apply_overlay"
+PATH="$ROOT_DIR/prebuilts/build-tools/linux-x86/bin:$PATH"
+PATH="$ROOT_DIR/prebuilts/build-tools/path/linux-x86:$PATH"
+PATH="$ROOT_DIR/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
+PATH="$ROOT_DIR/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
+PATH="$ROOT_DIR/prebuilts/clang/host/linux-x86/clang-r353983c/bin:$PATH"
+PATH="$ROOT_DIR/prebuilts/misc/linux-x86/lz4:$PATH"
+PATH="$ROOT_DIR/prebuilts/misc/linux-x86/dtc:$PATH"
+PATH="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt:$PATH"
+export LD_LIBRARY_PATH="$ROOT_DIR/prebuilts/clang/host/linux-x86/clang-r353983c/lib64:$LD_LIBRARY_PATH"
+export DTC_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/dtc/dtc"
+export DTC_OVERLAY_TEST_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt/ufdt_apply_overlay"
 
 chrt -bp 0 $$
 
@@ -46,6 +46,6 @@ make -j$(nproc) \
     CROSS_COMPILE=aarch64-linux-android- \
     CROSS_COMPILE_ARM32=arm-linux-androideabi-
 
-cp out/arch/arm64/boot/{dtbo.img,Image.lz4} "$TOP/device/google/coral-kernel"
-cp out/arch/arm64/boot/dts/google/qcom-base/sm8150.dtb "$TOP/device/google/coral-kernel"
-cp out/arch/arm64/boot/dts/google/qcom-base/sm8150-v2.dtb "$TOP/device/google/coral-kernel"
+cp out/arch/arm64/boot/{dtbo.img,Image.lz4} "$ROOT_DIR/device/google/coral-kernel"
+cp out/arch/arm64/boot/dts/google/qcom-base/sm8150.dtb "$ROOT_DIR/device/google/coral-kernel"
+cp out/arch/arm64/boot/dts/google/qcom-base/sm8150-v2.dtb "$ROOT_DIR/device/google/coral-kernel"
