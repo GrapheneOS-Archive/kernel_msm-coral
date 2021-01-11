@@ -6,11 +6,6 @@ set -o errexit -o pipefail
 
 ROOT_DIR=$(realpath ../../..)
 
-export KBUILD_BUILD_VERSION=1
-export KBUILD_BUILD_USER=grapheneos
-export KBUILD_BUILD_HOST=grapheneos
-export KBUILD_BUILD_TIMESTAMP="$(date -ud "@$(git show -s --format=%ct)")"
-
 PATH="$ROOT_DIR/prebuilts/build-tools/linux-x86/bin:$PATH"
 PATH="$ROOT_DIR/prebuilts/build-tools/path/linux-x86:$PATH"
 PATH="$ROOT_DIR/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
@@ -22,6 +17,11 @@ PATH="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt:$PATH"
 export LD_LIBRARY_PATH="$ROOT_DIR/prebuilts/clang/host/linux-x86/clang-r383902/bin:$LD_LIBRARY_PATH"
 export DTC_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/dtc/dtc"
 export DTC_OVERLAY_TEST_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt/ufdt_apply_overlay"
+
+export KBUILD_BUILD_VERSION=1
+export KBUILD_BUILD_USER=grapheneos
+export KBUILD_BUILD_HOST=grapheneos
+export KBUILD_BUILD_TIMESTAMP="$(date -ud "@$(git show -s --format=%ct)")"
 
 chrt -bp 0 $$
 
