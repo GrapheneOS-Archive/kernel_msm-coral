@@ -7,3 +7,6 @@
 [submodule "drivers/staging/qcacld-3.0"]
 	path = drivers/staging/qcacld-3.0
 	url = https://github.com/GlassROM-devices/kernel_google_coral_drivers_staging_qcacld-3.0
+[submodule "techpack/audio"]
+	path = techpack/audio
+	url = https://github.com/GlassROM-devices/kernel_google_coral_techpack_audio
