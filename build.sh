@@ -6,9 +6,13 @@ set -o errexit -o pipefail
 
 DEVICE=$1
 
-if [[ $DEVICE != coral && $DEVICE != sunfish ]]; then
-    echo invalid device codename. please use coral for flame device target
+if [[ $DEVICE != coral && $DEVICE != sunfish && $DEVICE != flame ]]; then
+    echo invalid device codename
     exit 1
+fi
+
+if [[ $DEVICE != sunfish ]]; then
+    DEVICE=floral
 fi
 
 ROOT_DIR=$(realpath ../../..)
@@ -71,11 +75,11 @@ make -j$(nproc) \
     CROSS_COMPILE=aarch64-linux-android- \
     CROSS_COMPILE_ARM32=arm-linux-androideabi-
 
-cp out/arch/arm64/boot/{dtbo.img,Image.lz4} "$ROOT_DIR/device/google/${DEVICE}-kernel"
-
-if [[ DEVICE = coral ]]; then
+if [[ $DEVICE = floral ]]; then
+    cp out/arch/arm64/boot/{dtbo.img,Image.lz4} "$ROOT_DIR/device/google/coral-kernel"
     cp out/arch/arm64/boot/dts/google/qcom-base/sm8150.dtb "$ROOT_DIR/device/google/coral-kernel"
     cp out/arch/arm64/boot/dts/google/qcom-base/sm8150-v2.dtb "$ROOT_DIR/device/google/coral-kernel"
-else if [[ DEVICE = sunfish ]]; then
+else if [[ $DEVICE = sunfish ]]; then
+    cp out/arch/arm64/boot/{dtbo.img,Image.lz4} "$ROOT_DIR/device/google/sunfish-kernel"
     cp out/arch/arm64/boot/dts/google/qcom-base/sdmmagpie.dtb "$ROOT_DIR/device/google/sunfish-kernel"
 fi
