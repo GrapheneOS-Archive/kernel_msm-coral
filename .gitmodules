@@ -10,3 +10,6 @@
 [submodule "techpack/audio"]
 	path = techpack/audio
 	url = https://github.com/GrapheneOS/kernel_google_coral_techpack_audio
+[submodule "drivers/input/touchscreen/fts_touch"]
+	path = drivers/input/touchscreen/fts_touch
+	url = https://android.googlesource.com/kernel/msm-modules/fts_touch
