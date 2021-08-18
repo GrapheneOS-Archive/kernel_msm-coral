@@ -1321,6 +1321,7 @@ config TOUCHSCREEN_SYNAPTICS_TCM
 
 source "drivers/input/touchscreen/synaptics_tcm/Kconfig"
 source "drivers/input/touchscreen/fts_touch/Kconfig"
+source "drivers/input/touchscreen/fts_touch_s5/Kconfig"
 
 config TOUCHSCREEN_RAYDIUM_CHIPSET
 	bool "Raydium WT030 touchpanel CHIPSET"
