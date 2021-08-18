@@ -14,3 +14,6 @@
 [submodule "drivers/input/touchscreen/fts_touch"]
 	path = drivers/input/touchscreen/fts_touch
 	url = https://android.googlesource.com/kernel/msm-modules/fts_touch
+[submodule "drivers/input/touchscreen/fts_touch_s5"]
+	path = drivers/input/touchscreen/fts_touch_s5
+	url = https://github.com/GrapheneOS/kernel_google_coral_drivers_input_touchscreen_fts_touch_s5
