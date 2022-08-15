@@ -116,8 +116,11 @@
  * This is the base location for PIE (ET_DYN with INTERP) loads. On
  * 64-bit, this is above 4GB to leave the entire 32-bit address
  * space open for things that want to use the area for 32-bit pointers.
+ *
+ * Originally used TASK_SIZE_64, switched to TASK_SIZE for compatibility with 39-bit mode.
+ * Will return the value of TASK_SIZE_64 if compat_va_39_bit is not enabled.
  */
-#define ELF_ET_DYN_BASE		(2 * TASK_SIZE_64 / 3)
+#define ELF_ET_DYN_BASE		(2 * TASK_SIZE / 3)
 
 #ifndef __ASSEMBLY__
 
@@ -156,11 +159,17 @@ struct linux_binprm;
 extern int arch_setup_additional_pages(struct linux_binprm *bprm,
 				       int uses_interp);
 
+// same as mmap_rnd_bits when VA_BITS == 39
+#define MMAP_RND_BITS_39_BIT 24
+
 /* 1GB of VA */
 #ifdef CONFIG_COMPAT
 #define STACK_RND_MASK			(test_thread_flag(TIF_32BIT) ? \
 						((1UL << mmap_rnd_compat_bits) - 1) >> (PAGE_SHIFT - 12) : \
-						((1UL << mmap_rnd_bits) - 1) >> (PAGE_SHIFT - 12))
+							(test_thread_flag(TIF_39BIT) ? \
+							((1UL << MMAP_RND_BITS_39_BIT) - 1) >> (PAGE_SHIFT - 12) : \
+							((1UL << mmap_rnd_bits) - 1) >> (PAGE_SHIFT - 12)))
+
 #else
 #define STACK_RND_MASK			(((1UL << mmap_rnd_bits) - 1) >> (PAGE_SHIFT - 12))
 #endif
