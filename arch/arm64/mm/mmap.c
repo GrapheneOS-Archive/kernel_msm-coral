@@ -56,6 +56,8 @@ unsigned long arch_mmap_rnd(void)
 #ifdef CONFIG_COMPAT
 	if (test_thread_flag(TIF_32BIT))
 		rnd = get_random_long() & ((1UL << mmap_rnd_compat_bits) - 1);
+	else if (test_thread_flag(TIF_39BIT))
+		rnd = get_random_long() & ((1UL << MMAP_RND_BITS_39_BIT) - 1);
 	else
 #endif
 		rnd = get_random_long() & ((1UL << mmap_rnd_bits) - 1);
