@@ -99,6 +99,7 @@ void arch_setup_new_exec(void);
 #define TIF_SSBD		23	/* Wants SSB mitigation */
 #define TIF_TAGGED_ADDR		24	/* Allow tagged user addresses */
 #define TIF_MM_RELEASED		25
+#define TIF_39BIT		30	/* compat_va_39_bit mode */
 
 #define _TIF_SIGPENDING		(1 << TIF_SIGPENDING)
 #define _TIF_NEED_RESCHED	(1 << TIF_NEED_RESCHED)
