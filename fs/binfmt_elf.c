@@ -859,6 +859,11 @@ static int load_elf_binary(struct linux_binprm *bprm)
 	/* Do this immediately, since STACK_TOP as used in setup_arg_pages
 	   may depend on the personality.  */
 	SET_PERSONALITY2(loc->elf_ex, &arch_state);
+
+	if (bprm->compat_va_39_bit) {
+		set_thread_flag(TIF_39BIT);
+	}
+
 	if (elf_read_implies_exec(loc->elf_ex, executable_stack))
 		current->personality |= READ_IMPLIES_EXEC;
 

@@ -20,6 +20,7 @@
 #define __ASM_PROCESSOR_H
 
 #define TASK_SIZE_64		(UL(1) << VA_BITS)
+#define TASK_SIZE_39		(UL(1) << 39)
 
 #define KERNEL_DS	UL(-1)
 #define USER_DS		(TASK_SIZE_64 - 1)
@@ -60,9 +61,9 @@
 #define TASK_SIZE_32		(UL(0x100000000) - PAGE_SIZE)
 #endif /* CONFIG_ARM64_64K_PAGES */
 #define TASK_SIZE		(test_thread_flag(TIF_32BIT) ? \
-				TASK_SIZE_32 : TASK_SIZE_64)
+				TASK_SIZE_32 : (test_thread_flag(TIF_39BIT) ? TASK_SIZE_39 : TASK_SIZE_64))
 #define TASK_SIZE_OF(tsk)	(test_tsk_thread_flag(tsk, TIF_32BIT) ? \
-				TASK_SIZE_32 : TASK_SIZE_64)
+				TASK_SIZE_32 : (test_tsk_thread_flag(tsk, TIF_39BIT) ? TASK_SIZE_39 : TASK_SIZE_64))
 #else
 #define TASK_SIZE		TASK_SIZE_64
 #endif /* CONFIG_COMPAT */
@@ -73,7 +74,7 @@
 #ifdef CONFIG_COMPAT
 #define AARCH32_KUSER_HELPERS_BASE 0xffff0000
 #define STACK_TOP		(test_thread_flag(TIF_32BIT) ? \
-				AARCH32_KUSER_HELPERS_BASE : STACK_TOP_MAX)
+				AARCH32_KUSER_HELPERS_BASE : (test_thread_flag(TIF_39BIT) ? TASK_SIZE_39 : STACK_TOP_MAX))
 #else
 #define STACK_TOP		STACK_TOP_MAX
 #endif /* CONFIG_COMPAT */
