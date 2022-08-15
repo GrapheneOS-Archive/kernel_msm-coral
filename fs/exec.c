@@ -1748,6 +1748,10 @@ static int do_execveat_common(int fd, struct filename *filename,
 	if (!bprm)
 		goto out_files;
 
+#define FLAG_COMPAT_VA_39_BIT (1 << 30)
+	bprm->compat_va_39_bit = flags & FLAG_COMPAT_VA_39_BIT;
+	flags &= ~FLAG_COMPAT_VA_39_BIT; // flag validation fails when it sees an unknown flag
+
 	retval = prepare_bprm_creds(bprm);
 	if (retval)
 		goto out_free;
