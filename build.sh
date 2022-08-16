@@ -16,18 +16,19 @@ if [[ $DEVICE != sunfish ]]; then
 fi
 
 ROOT_DIR=$(realpath ../../..)
+LEGACY_DIR=$ROOT_DIR/kernel/prebuilts/legacy
 
 PATH="$ROOT_DIR/prebuilts/build-tools/linux-x86/bin:$PATH"
 PATH="$ROOT_DIR/prebuilts/build-tools/path/linux-x86:$PATH"
-PATH="$ROOT_DIR/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
-PATH="$ROOT_DIR/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
-PATH="$ROOT_DIR/prebuilts/clang/host/linux-x86/clang-r416183b/bin:$PATH"
-PATH="$ROOT_DIR/prebuilts/misc/linux-x86/lz4:$PATH"
-PATH="$ROOT_DIR/prebuilts/misc/linux-x86/dtc:$PATH"
-PATH="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt:$PATH"
-export LD_LIBRARY_PATH="$ROOT_DIR/prebuilts/clang/host/linux-x86/clang-r416183b/lib64:$LD_LIBRARY_PATH"
-export DTC_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/dtc/dtc"
-export DTC_OVERLAY_TEST_EXT="$ROOT_DIR/prebuilts/misc/linux-x86/libufdt/ufdt_apply_overlay"
+PATH="$LEGACY_DIR/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH"
+PATH="$LEGACY_DIR/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin:$PATH"
+PATH="$LEGACY_DIR/clang/host/linux-x86/clang-r416183b/bin:$PATH"
+PATH="$LEGACY_DIR/misc/linux-x86/lz4:$PATH"
+PATH="$LEGACY_DIR/misc/linux-x86/dtc:$PATH"
+PATH="$LEGACY_DIR/misc/linux-x86/libufdt:$PATH"
+export LD_LIBRARY_PATH="$LEGACY_DIR/clang/host/linux-x86/clang-r416183b/lib64:$LD_LIBRARY_PATH"
+export DTC_EXT="$LEGACY_DIR/misc/linux-x86/dtc/dtc"
+export DTC_OVERLAY_TEST_EXT="$LEGACY_DIR/misc/linux-x86/libufdt/ufdt_apply_overlay"
 
 export KBUILD_BUILD_VERSION=1
 export KBUILD_BUILD_USER=grapheneos
