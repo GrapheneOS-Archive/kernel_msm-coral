@@ -445,6 +445,8 @@ static void msm_restart_prepare(const char *cmd)
 		}
 	}
 
+	/* always force hard resets, to make sure an edl exploit can't easily read memory */
+	need_warm_reset = false;
 
 	/* Hard reset the PMIC unless memory contents must be maintained. */
 	if (force_warm_reboot || need_warm_reset)
