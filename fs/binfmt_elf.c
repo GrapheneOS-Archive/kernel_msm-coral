@@ -863,6 +863,8 @@ static int load_elf_binary(struct linux_binprm *bprm)
 #ifdef CONFIG_ARM64
 	if (bprm->compat_va_39_bit) {
 		set_thread_flag(TIF_39BIT);
+	} else {
+		clear_thread_flag(TIF_39BIT);
 	}
 #endif
 
